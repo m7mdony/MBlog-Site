@@ -10,14 +10,7 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
     strictPort: true,
-    headers: {
-      'X-Content-Type-Options': 'nosniff',
-      'Content-Type': 'application/javascript; charset=utf-8'
-    },
-    fs: {
-      strict: false,
-      allow: ['..']
-    },
+    
     middlewareMode: false
   },
   build: {
@@ -43,10 +36,7 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom'],
-    force: true
-  },
+
   define: {
     __DEV__: mode === 'development'
   }
