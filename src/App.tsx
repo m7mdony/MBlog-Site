@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AppSidebar } from "@/components/AppSidebar";
 import AllConcepts from "./pages/AllConcepts";
 import AllTutorials from "./pages/AllTutorials";
@@ -47,8 +47,21 @@ import InfographicsManagement from "./pages/dashboard/InfographicsManagement";
 import AddInfographic from "./pages/dashboard/AddInfographic";
 import EditInfographic from "./pages/dashboard/EditInfographic";
 import GTMManagement from "./pages/dashboard/GTMManagement";
+import { useEffect } from "react";
 
 const queryClient = new QueryClient();
+
+// Debug component to log route changes
+const RouteDebugger = () => {
+  const location = useLocation();
+  
+  useEffect(() => {
+    console.log("Route changed to:", location.pathname);
+    console.log("Current location:", location);
+  }, [location]);
+  
+  return null;
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -56,8 +69,10 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <RouteDebugger />
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/test" element={<div className="p-8 text-center"><h1 className="text-2xl font-bold">Test Route Working!</h1><p>If you can see this, routing is working.</p></div>} />
           <Route path="/all-articles" element={<AllArticles />} />
           <Route path="/all-concepts" element={<AllConcepts />} />
           <Route path="/tutorials" element={<AllTutorials />} />
