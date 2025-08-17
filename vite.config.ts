@@ -10,7 +10,6 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
     strictPort: true,
-    
     middlewareMode: false
   },
   build: {
@@ -36,7 +35,6 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-
   define: {
     __DEV__: mode === 'development'
   }

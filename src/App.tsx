@@ -91,39 +91,39 @@ const DashboardLayout = () => (
           <SidebarTrigger />
         </header>
         <div className="overflow-auto p-6">
-        <Routes>
-          <Route index element={<Dashboard />} />
-          <Route path="concepts" element={<ConceptsManagementAdvanced />} />
-          <Route path="concepts/new" element={<AddConcept />} />
-          <Route path="add-concept" element={<AddConcept />} />
+          <Routes>
+            <Route index element={<Dashboard />} />
+            <Route path="concepts" element={<ConceptsManagementAdvanced />} />
+            <Route path="concepts/new" element={<AddConcept />} />
+            <Route path="add-concept" element={<AddConcept />} />
             <Route path="add-article" element={<AddArticle />} />
             <Route path="edit-article/:id" element={<EditArticle />} />
-          <Route path="articles" element={<ArticlesManagement />} />
-          <Route path="stats" element={<StatsManagement />} />
-          <Route path="concepts/hidden" element={<div className="p-6"><h1 className="text-2xl font-bold">المحتوى المخفي</h1><p className="text-muted-foreground">قريباً...</p></div>} />
-          <Route path="tutorials" element={<TutorialsManagement />} />
-          <Route path="tutorials/new" element={<AddTutorial />} />
-          <Route path="add-tutorial" element={<AddTutorial />} />
-          <Route path="resources" element={<ResourcesManagement />} />
-          <Route path="resources/new" element={<AddResource />} />
-          <Route path="add-resource" element={<AddResource />} />
-          <Route path="infographics" element={<InfographicsManagement />} />
-          <Route path="add-infographic" element={<AddInfographic />} />
-          <Route path="edit-infographic/:id" element={<EditInfographic />} />
-          <Route path="favorites" element={<FavoritesManagement />} />
-          <Route path="favorites/new" element={<AddFavorite />} />
-          <Route path="add-favorite" element={<AddFavorite />} />
-          <Route path="analytics" element={<Analytics />} />
-          <Route path="filters" element={<FiltersManagement />} />
-          <Route path="sections" element={<SectionSettings />} />
-          <Route path="profile" element={<ProfileSettings />} />
-          <Route path="about" element={<AboutManagement />} />
-          <Route path="contact" element={<ContactManagement />} />
-          <Route path="consultation-button" element={<ConsultationButtonManagement />} />
-          <Route path="cta" element={<CTAManagement />} />
-          <Route path="gtm" element={<GTMManagement />} />
-          <Route path="settings" element={<ProfileSettings />} />
-        </Routes>
+            <Route path="articles" element={<ArticlesManagement />} />
+            <Route path="stats" element={<StatsManagement />} />
+            <Route path="concepts/hidden" element={<div className="p-6"><h1 className="text-2xl font-bold">المحتوى المخفي</h1><p className="text-muted-foreground">قريباً...</p></div>} />
+            <Route path="tutorials" element={<TutorialsManagement />} />
+            <Route path="tutorials/new" element={<AddTutorial />} />
+            <Route path="add-tutorial" element={<AddTutorial />} />
+            <Route path="resources" element={<ResourcesManagement />} />
+            <Route path="resources/new" element={<AddResource />} />
+            <Route path="add-resource" element={<AddResource />} />
+            <Route path="infographics" element={<InfographicsManagement />} />
+            <Route path="add-infographic" element={<AddInfographic />} />
+            <Route path="edit-infographic/:id" element={<EditInfographic />} />
+            <Route path="favorites" element={<FavoritesManagement />} />
+            <Route path="favorites/new" element={<AddFavorite />} />
+            <Route path="add-favorite" element={<AddFavorite />} />
+            <Route path="analytics" element={<Analytics />} />
+            <Route path="filters" element={<FiltersManagement />} />
+            <Route path="sections" element={<SectionSettings />} />
+            <Route path="profile" element={<ProfileSettings />} />
+            <Route path="about" element={<AboutManagement />} />
+            <Route path="contact" element={<ContactManagement />} />
+            <Route path="consultation-button" element={<ConsultationButtonManagement />} />
+            <Route path="cta" element={<CTAManagement />} />
+            <Route path="gtm" element={<GTMManagement />} />
+            <Route path="settings" element={<ProfileSettings />} />
+          </Routes>
         </div>
       </main>
     </div>
