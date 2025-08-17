@@ -1,0 +1,68 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- تدرج أزرق مائل للأخضر للحرف الأول -->
+    <linearGradient id="tealGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#20B2AA;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#008B8B;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- تدرج أرجواني لبقية الكلمة -->
+    <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8A2BE2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4B0082;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- تدرج رمادي للاسم الإنجليزي -->
+    <linearGradient id="grayGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#696969;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2F4F4F;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- ظل خفيف -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- خلفية بيضاء مع ملمس -->
+  <rect width="200" height="200" fill="#FFFFFF" rx="20"/>
+  
+  <!-- كلمة "مريم" -->
+  <g filter="url(#shadow)" transform="translate(100, 80)">
+    <!-- الحرف الأول (م) باللون الأزرق المائل للأخضر -->
+    <text x="-60" y="0" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="url(#tealGradient)" text-anchor="middle">
+      م
+    </text>
+    
+    <!-- باقي الحروف (ريم) باللون الأرجواني -->
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="url(#purpleGradient)" text-anchor="middle">
+      ريم
+    </text>
+  </g>
+  
+  <!-- الاسم الإنجليزي -->
+  <text x="100" y="120" font-family="Arial, sans-serif" font-size="16" font-weight="300" fill="url(#grayGradient)" text-anchor="middle">
+    Maryam Baathman
+  </text>
+  
+  <!-- أيقونات التواصل الاجتماعي -->
+  <g transform="translate(100, 150)">
+    <!-- أيقونة تويتر -->
+    <circle cx="-30" cy="0" r="12" fill="#1DA1F2"/>
+    <path d="M-30-8c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zm0 6c-1.1 0-2-0.9-2-2s0.9-2 2-2 2 0.9 2 2-0.9 2-2 2z" fill="white"/>
+    
+    <!-- أيقونة سناب شات -->
+    <circle cx="0" cy="0" r="12" fill="#FFFC00"/>
+    <path d="M0-8c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zm0 6c-1.1 0-2-0.9-2-2s0.9-2 2-2 2 0.9 2 2-0.9 2-2 2z" fill="black"/>
+    
+    <!-- أيقونة إنستغرام -->
+    <circle cx="30" cy="0" r="12" fill="#E4405F"/>
+    <path d="M30-8c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zm0 6c-1.1 0-2-0.9-2-2s0.9-2 2-2 2 0.9 2 2-0.9 2-2 2z" fill="white"/>
+  </g>
+  
+  <!-- اسم المستخدم @MBaathman -->
+  <rect x="120" y="140" width="80" height="20" rx="10" fill="#8A2BE2"/>
+  <text x="160" y="153" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white" text-anchor="middle">
+    @MBaathman
+  </text>
+</svg> 

@@ -1,0 +1,22 @@
+# Set correct MIME types for JavaScript modules
+<FilesMatch "\.js$">
+    Header set Content-Type "application/javascript"
+</FilesMatch>
+
+# Set correct MIME types for CSS
+<FilesMatch "\.css$">
+    Header set Content-Type "text/css"
+</FilesMatch>
+
+# Set correct MIME types for HTML
+<FilesMatch "\.html$">
+    Header set Content-Type "text/html"
+</FilesMatch>
+
+# Enable CORS for development
+Header always set Access-Control-Allow-Origin "*"
+Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+Header always set Access-Control-Allow-Headers "Content-Type, Authorization"
+
+# Prevent MIME type sniffing
+Header always set X-Content-Type-Options "nosniff" 
