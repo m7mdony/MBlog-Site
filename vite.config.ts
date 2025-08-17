@@ -8,6 +8,13 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    headers: {
+      'X-Content-Type-Options': 'nosniff',
+    },
+    fs: {
+      strict: false,
+      allow: ['..']
+    }
   },
   build: {
     outDir: "dist",
@@ -32,4 +39,7 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom']
+  }
 }));
