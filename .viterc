@@ -1,0 +1,13 @@
+{
+  "server": {
+    "port": 8080,
+    "host": "::",
+    "strictPort": true,
+    "headers": {
+      "X-Content-Type-Options": "nosniff"
+    }
+  },
+  "optimizeDeps": {
+    "force": true
+  }
+} 

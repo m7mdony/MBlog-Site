@@ -8,13 +8,16 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    strictPort: true,
     headers: {
       'X-Content-Type-Options': 'nosniff',
+      'Content-Type': 'application/javascript; charset=utf-8'
     },
     fs: {
       strict: false,
       allow: ['..']
-    }
+    },
+    middlewareMode: false
   },
   build: {
     outDir: "dist",
@@ -40,6 +43,10 @@ export default defineConfig(({ mode }) => ({
     },
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom']
+    include: ['react', 'react-dom', 'react-router-dom'],
+    force: true
+  },
+  define: {
+    __DEV__: mode === 'development'
   }
 }));
