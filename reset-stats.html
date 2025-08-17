@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تصفير الإحصائيات - MBlog</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .stats-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: right;
+        }
+        .reset-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+        .reset-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .reset-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+        }
+        .log {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 تصفير جميع الإحصائيات</h1>
+        <p>سيتم تصفير جميع الإحصائيات (المشاهدات، الإعجابات، التحميلات، التعليقات) في جميع أنواع المحتوى</p>
+        
+        <div class="stats-info">
+            <h3>📊 الإحصائيات الحالية:</h3>
+            <div id="currentStats">جاري التحميل...</div>
+        </div>
+        
+        <button class="reset-btn" onclick="resetAllStats()" id="resetBtn">
+            🔄 تصفير جميع الإحصائيات
+        </button>
+        
+        <div class="success" id="successMsg">
+            ✅ تم تصفير جميع الإحصائيات بنجاح!
+        </div>
+        
+        <div class="error" id="errorMsg">
+            ❌ حدث خطأ أثناء تصفير الإحصائيات
+        </div>
+        
+        <div class="log" id="logOutput"></div>
+    </div>
+
+    <script>
+        // عرض الإحصائيات الحالية
+        function showCurrentStats() {
+            const stats = JSON.parse(localStorage.getItem('stats') || '{}');
+            const concepts = JSON.parse(localStorage.getItem('concepts') || '[]');
+            const infographics = JSON.parse(localStorage.getItem('infographics') || '[]');
+            const resources = JSON.parse(localStorage.getItem('resources') || '[]');
+            const tutorials = JSON.parse(localStorage.getItem('tutorials') || '[]');
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            document.getElementById('currentStats').innerHTML = `
+                <p><strong>إجمالي المشاهدات:</strong> ${stats.totalViews || 0}</p>
+                <p><strong>إجمالي الإعجابات:</strong> ${stats.totalLikes || 0}</p>
+                <p><strong>إجمالي التحميلات:</strong> ${stats.totalDownloads || 0}</p>
+                <p><strong>إجمالي التعليقات:</strong> ${stats.totalComments || 0}</p>
+                <hr>
+                <p><strong>المفاهيم:</strong> ${concepts.length} (${concepts.reduce((sum, c) => sum + (c.views || 0), 0)} مشاهدة)</p>
+                <p><strong>الإنفوجرافيك:</strong> ${infographics.length} (${infographics.reduce((sum, i) => sum + (i.views || 0), 0)} مشاهدة)</p>
+                <p><strong>الموارد:</strong> ${resources.length} (${resources.reduce((sum, r) => sum + (r.views || 0), 0)} مشاهدة)</p>
+                <p><strong>الدروس:</strong> ${tutorials.length} (${tutorials.reduce((sum, t) => sum + (t.views || 0), 0)} مشاهدة)</p>
+                <p><strong>المفضلة:</strong> ${favorites.length} (${favorites.reduce((sum, f) => sum + (f.views || 0), 0)} مشاهدة)</p>
+            `;
+        }
+
+        // تصفير جميع الإحصائيات
+        function resetAllStats() {
+            const resetBtn = document.getElementById('resetBtn');
+            const successMsg = document.getElementById('successMsg');
+            const errorMsg = document.getElementById('errorMsg');
+            const logOutput = document.getElementById('logOutput');
+            
+            resetBtn.disabled = true;
+            resetBtn.textContent = '🔄 جاري التصفير...';
+            
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+            logOutput.style.display = 'block';
+            logOutput.innerHTML = '🚀 بدء تصفير جميع الإحصائيات...<br>';
+            
+            try {
+                // تصفير إحصائيات المقالات
+                const articles = JSON.parse(localStorage.getItem('articles') || '[]');
+                articles.forEach(article => {
+                    article.views = 0;
+                    article.likes = 0;
+                    article.downloads = 0;
+                    article.comments = 0;
+                });
+                localStorage.setItem('articles', JSON.stringify(articles));
+                logOutput.innerHTML += `✅ تم تصفير إحصائيات ${articles.length} مقال<br>`;
+
+                // تصفير إحصائيات المفاهيم
+                const concepts = JSON.parse(localStorage.getItem('concepts') || '[]');
+                concepts.forEach(concept => {
+                    concept.views = 0;
+                    concept.likes = 0;
+                    concept.downloads = 0;
+                    concept.comments = 0;
+                });
+                localStorage.setItem('concepts', JSON.stringify(concepts));
+                logOutput.innerHTML += `✅ تم تصفير إحصائيات ${concepts.length} مفهوم<br>`;
+
+                // تصفير إحصائيات الإنفوجرافيك
+                const infographics = JSON.parse(localStorage.getItem('infographics') || '[]');
+                infographics.forEach(infographic => {
+                    infographic.views = 0;
+                    infographic.likes = 0;
+                    infographic.downloads = 0;
+                    infographic.comments = 0;
+                });
+                localStorage.setItem('infographics', JSON.stringify(infographics));
+                logOutput.innerHTML += `✅ تم تصفير إحصائيات ${infographics.length} إنفوجرافيك<br>`;
+
+                // تصفير إحصائيات الموارد
+                const resources = JSON.parse(localStorage.getItem('resources') || '[]');
+                resources.forEach(resource => {
+                    resource.views = 0;
+                    resource.likes = 0;
+                    resource.downloads = 0;
+                    resource.comments = 0;
+                });
+                localStorage.setItem('resources', JSON.stringify(resources));
+                logOutput.innerHTML += `✅ تم تصفير إحصائيات ${resources.length} مورد<br>`;
+
+                // تصفير إحصائيات الدروس
+                const tutorials = JSON.parse(localStorage.getItem('tutorials') || '[]');
+                tutorials.forEach(tutorial => {
+                    tutorial.views = 0;
+                    tutorial.likes = 0;
+                    tutorial.downloads = 0;
+                    tutorial.comments = 0;
+                });
+                localStorage.setItem('tutorials', JSON.stringify(tutorials));
+                logOutput.innerHTML += `✅ تم تصفير إحصائيات ${tutorials.length} درس<br>`;
+
+                // تصفير إحصائيات المفضلة
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites.forEach(favorite => {
+                    favorite.views = 0;
+                    favorite.likes = 0;
+                    favorite.downloads = 0;
+                    favorite.comments = 0;
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                logOutput.innerHTML += `✅ تم تصفير إحصائيات ${favorites.length} مفضلة<br>`;
+
+                // تصفير الإحصائيات العامة
+                const stats = {
+                    totalViews: 0,
+                    totalLikes: 0,
+                    totalDownloads: 0,
+                    totalComments: 0,
+                    totalArticles: articles.length,
+                    totalConcepts: concepts.length,
+                    totalInfographics: infographics.length,
+                    totalResources: resources.length,
+                    totalTutorials: tutorials.length,
+                    totalFavorites: favorites.length
+                };
+                localStorage.setItem('stats', JSON.stringify(stats));
+                logOutput.innerHTML += `✅ تم تصفير الإحصائيات العامة<br>`;
+
+                // تصفير علامات الإعجاب المحفوظة
+                const likedItems = JSON.parse(localStorage.getItem('likedItems') || '[]');
+                if (likedItems.length > 0) {
+                    localStorage.removeItem('likedItems');
+                    logOutput.innerHTML += `✅ تم مسح ${likedItems.length} علامة إعجاب محفوظة<br>`;
+                }
+
+                logOutput.innerHTML += '<br>🎉 تم تصفير جميع الإحصائيات بنجاح!<br>';
+                logOutput.innerHTML += '<br>📊 الإحصائيات الجديدة:<br>';
+                logOutput.innerHTML += `   - المقالات: ${articles.length}<br>`;
+                logOutput.innerHTML += `   - المفاهيم: ${concepts.length}<br>`;
+                logOutput.innerHTML += `   - الإنفوجرافيك: ${infographics.length}<br>`;
+                logOutput.innerHTML += `   - الموارد: ${resources.length}<br>`;
+                logOutput.innerHTML += `   - الدروس: ${tutorials.length}<br>`;
+                logOutput.innerHTML += `   - المفضلة: ${favorites.length}<br>`;
+
+                // إرسال حدث تحديث للصفحة
+                window.dispatchEvent(new CustomEvent('storage'));
+                logOutput.innerHTML += '<br>🔄 تم إرسال حدث تحديث للصفحة<br>';
+
+                successMsg.style.display = 'block';
+                resetBtn.textContent = '✅ تم التصفير';
+                
+                // تحديث عرض الإحصائيات
+                setTimeout(showCurrentStats, 1000);
+                
+            } catch (error) {
+                logOutput.innerHTML += `<br>❌ خطأ: ${error.message}<br>`;
+                errorMsg.style.display = 'block';
+                resetBtn.disabled = false;
+                resetBtn.textContent = '🔄 تصفير جميع الإحصائيات';
+            }
+        }
+
+        // عرض الإحصائيات عند تحميل الصفحة
+        window.onload = showCurrentStats;
+    </script>
+</body>
+</html> 
