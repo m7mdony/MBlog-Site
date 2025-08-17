@@ -1,0 +1,90 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/dashboard",
+      "destination": "/index.html",
+      "permanent": false
+    },
+    {
+      "source": "/about",
+      "destination": "/index.html",
+      "permanent": false
+    },
+    {
+      "source": "/contact",
+      "destination": "/index.html",
+      "permanent": false
+    },
+    {
+      "source": "/articles",
+      "destination": "/index.html",
+      "permanent": false
+    },
+    {
+      "source": "/concepts",
+      "destination": "/index.html",
+      "permanent": false
+    },
+    {
+      "source": "/tutorials",
+      "destination": "/index.html",
+      "permanent": false
+    },
+    {
+      "source": "/resources",
+      "destination": "/index.html",
+      "permanent": false
+    },
+    {
+      "source": "/favorites",
+      "destination": "/index.html",
+      "permanent": false
+    },
+    {
+      "source": "/infographics",
+      "destination": "/index.html",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite"
+}
